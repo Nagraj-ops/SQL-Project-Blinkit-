@@ -115,7 +115,51 @@ group by Outlet_Type
 order by Total_sales asc;
 
 
+select * from dbo.BlinkIT_Data;
 
+----Stored Procedure
+
+alter procedure spitemtypebyprameter
+(
+   @Item_Type varchar(40),
+   @Outlet_Establishment_year int
+)
+as
+begin
+
+select * from BlinkIT_Data where Item_Type = @Item_Type and Outlet_Establishment_Year = @Outlet_Establishment_year
+
+end
+
+spitemtypebyprameter 'Canned', 2012
+
+
+create procedure spoutletlocationtypebyprameter
+(
+   @Outlet_Location_type varchar(40)
+)
+as
+begin
+
+select * from BlinkIT_Data where Outlet_Location_type = @Outlet_Location_type
+
+end
+
+spoutletlocationtypebyprameter 'Tier 1';
+
+---crete view--
+
+create view blinkit_view as
+
+select Item_Fat_Content, Item_Type, Outlet_Location_type from BlinkIT_Data
+
+where Item_Fat_Content = 'Regular';
+
+drop view blimkit_data;
+drop view blimkit_view;
+drop view blinkit_view;
+
+select * from blinkit_view
 
  
 
